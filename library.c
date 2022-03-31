@@ -1,6 +1,12 @@
+
+// libraries 
+//*************************************
 #include <stdio.h>
 #include <stdlib.h>
+//*************************************
 
+//the user defined structure which contains books' data 
+//*************************************
 typedef struct books
  {
     char name [20] ;
@@ -9,48 +15,55 @@ typedef struct books
     struct books * next ;
 
  }book ;
+//*************************************
 
 
-
+//function to creat new book
+//*************************************
 book * newbook ( char* name , char * publisher , int price )
 {
-    book * temp = NULL;
-    int i = 0 ;
-    temp=malloc(sizeof(book));
-    if (temp!=NULL)
+    book * temp = NULL;                           //pointer to the address of the new book 
+    int i = 0 ;                                   //counter
+    temp=malloc(sizeof(book));                    //memory allocation to get the address of the new book
+    if (temp!=NULL)                               //to make sure that malloc function worked correctly ad didn't return NULL
     {
-        temp ->price = price ;
-        while (name[i]!=NULL)
+        temp ->price = price ;                    //add user defined book price
+        while (name[i]!=NULL)                     //add book name using a loop to add all the characters 
         {
            temp -> name[i] = name[i];
            i++;
         }
-        i=0 ;
-        while (publisher[i]!=NULL)
+        i=0 ;                                     //reinitialize the counter
+        while (publisher[i]!=NULL)                //add book bublisher using a loop to add all the characters 
         {
            temp -> publisher[i] = publisher[i];
            i++;
         }
-        temp ->next = NULL ;
+        temp ->next = NULL ;                      //make the next pointer point to NULL for now as there is no next node
     }
-    return temp ;
+    return temp ;                                 //return the new book's pointer
 }
+//*************************************
 
 
 
+//function to prit all the stored data 
+//*************************************
 void printall(book*first)
 {
-    book * current=first;
+    book * current=first;                         //pointer to traverse the linked list
     while(1)
     {
-        printf("name : %s , publisher : %s , price : %d \n",current->name,current->publisher,current->price);
-        if (current->next!=NULL)
+        printf("name : %s , publisher : %s , price : %d \n",current->name,current->publisher,current->price); //print statement
+     
+     
+        if (current->next!=NULL)                 //if this node is not the last node move to the next address 
         {
-            current=current->next;
+            current=current->next;              
         }
         else
         {
-            break;
+            break;                              //if this node is the last node break the loop and end the printing function 
         }
     }
 }
