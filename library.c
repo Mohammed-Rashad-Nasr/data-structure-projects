@@ -67,110 +67,137 @@ void printall(book*first)
         }
     }
 }
+//*************************************
 
 
+
+//function to print all publishers'names
+//*************************************
 void printpublishers (book*first)
 {
-    book * current=first;
-    int i =0 ;
+    book * current=first;                           //pointer to traverse the linked list
+    int i =0 ;                                      //counter to print numbers with publishers
     while(1)
     {
         i++;
-        printf("%d - %s \n",i,current->publisher);
+        printf("%d - %s \n",i,current->publisher);  //print statemet
+        
         if (current->next!=NULL)
         {
-            current=current->next;
+            current=current->next;                  //if this node is not the last node move to the next address 
         }
         else
         {
-            break;
+            break;                                  //if this node is the last node break the loop and end the printing function
         }
     }
 }
+//*************************************
 
 
+
+
+//function to determine the highest price book and print its data
+//*************************************
 void highest(book*first)
 {
-    book * current     = first;
-    book * highestbook = first;
-    int highestprice   = first->price;
+    book * current     = first;             //pointer to traverse the linked list
+    book * highestbook = first;             //pointer to the highest price book node
+    int highestprice   = first->price;      //variable to hold the highest price ad compare it with other prices
 
     while(1){
-        if (current->price>highestprice)
+        if (current->price>highestprice)    //check if the price of the current book is higher or not 
         {
-            highestprice=current->price;
-            highestbook = current;
+            highestprice=current->price;    //if the current price is higher put it on the variable as the highest until now 
+            highestbook = current;          //and then point to its address
         }
         if (current->next!=NULL)
         {
-            current=current->next;
+            current=current->next;          //if this node is not the last node move to the next address
         }
         else
         {
-            break;
+            break;                          //if this node is the last node break the loop   
         }
     }
-    printf("name : %s , publisher : %s , price : %d \n",highestbook->name,highestbook->publisher,highestbook->price);
+    printf("name : %s , publisher : %s , price : %d \n",highestbook->name,highestbook->publisher,highestbook->price); //print book's data
 }
+//*************************************
 
 
 
+
+//main function
+//*************************************
 int main()
 {
-   book * first = NULL;
-   book * added = NULL;
-   int ch ;
-   char name [20] ;
-   char publisher [20] ;
-   int command ;
-   int price ;
+ 
+ //variables 
+ //*******************************
+   book * first = NULL;   //first node pointer
+   book * added = NULL;   //pointer to the current ode while addig new nodes
+   int ch ;               //variable to read stdin for flushing 
+   char name [20] ;       //name string
+   char publisher [20] ;  //publisher string
+   int command ;          //command used to select function
+   int price ;            //price variable
+ //*******************************
+ 
+ 
+ //the program will stuck here inside this loop until user selects exit option
+ //*******************************
    while (1)
     {
-
+        //take the command from the user
+        //******************************
         printf("enter the number of the command :\n 1 - add book \n 2 - display all books information \n 3 - display highest price book \n 4 - display list of publishers \n 5 - exit \n");
         scanf("%d",&command);
+        //******************************
+    
         if (command == 5)
         {
-            printf("bye \n"); ;
+            printf("bye \n");              //exit the program
             break;
         }
         else if(command == 4)
         {
-            printpublishers(first);
+            printpublishers(first);        //print publishers' names
         }
         else if(command == 3)
         {
-            highest(first);
+            highest(first);                //print highest book's data
         }
         else if(command == 2)
         {
-            printall(first);
+            printall(first);               //print all stored data
         }
-        else if(command == 1)
+        else if(command == 1)              //add new book
         {
-            printf("enter the name \n");
-            while ((ch = getchar()) != '\n' && ch != EOF);
+            //get book's data
+            //***************
+            printf("enter the name \n");   
+            while ((ch = getchar()) != '\n' && ch != EOF); //flush stdin
             fgets(name,20,stdin);
             printf("enter the publisher\n");
             fgets(publisher,20,stdin);
             printf("enter the price \n");
             scanf("%d",&price);
+            //***************
 
-
-            if (first == NULL)
+            if (first == NULL)          //if this is the first input store it in the first node
             {
-                first = newbook(name , publisher , price);
+                first = newbook(name , publisher , price);         //store data in first ode address
                 if (first!=NULL)
                 {
-                    added = first ;
+                    added = first ;                                //point to the first node
                 }
             }
-            else
+            else                        //if it is not the first input add new node
             {
-                added->next = newbook(name , publisher , price);
-                if (added->next!=NULL)
+                added->next = newbook(name , publisher , price);   //store data in the next pointer of the last node
+                if (added->next!=NULL)                             //make sure that the next address returned by malloc is not NULL
                 {
-                    added = added->next ;
+                    added = added->next ;                          //point to the new node now
                 }
             }
         }
