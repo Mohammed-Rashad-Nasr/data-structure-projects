@@ -4,7 +4,7 @@
 #include <stdlib.h>
 //*************************************
 
-//the user defined structure which contains books' data
+//the user defined structure which contains cadidates' data
 //*************************************
 typedef struct candidate
  {
